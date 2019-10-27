@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>title</title>
+</head>
+<body>
+    身長(cm):<input type="number" step="0.1" min="0" id="height"><br>
+    体重(kg):<input type="number" step="0.1" min="0" id="weight"><br>
+    <button id="bt">計測</button>
+    <div id="bmi"></div>
+    <div id="result"></div>
+
+<script>
+'use strict';
+window.onload=function(){
+    const eleHeight=document.getElementById("height");
+    const eleWeight=document.getElementById("weight");
+    const eleBt=document.getElementById("bt");
+    const eleBmi=document.getElementById("bmi");
+    const eleResult=document.getElementById("result");
+    eleBt.addEventListener("click",function(){
+        let height=parseFloat(eleHeight.value)/100;
+        let weight=parseFloat(eleWeight.value);
+        let bmi=weight/(height*height);
+        eleBmi.textContent='BMI:'+bmi.toFixed(2); //toFixed小数点二桁
+        let result;
+        if(bmi<18.5){
+            result='低体重';
+        }else if(bmi<25){
+            result='普通';
+        }else if(bmi<30){
+            result='肥満(1度)';
+        }else if(bmi<35){
+            result='肥満(2度)';
+        }else if(bmi<40){
+            result='肥満(3度)';
+        }else{
+            result='肥満(4度)';
+        }
+        eleResult.textContent=result;
+    });
+}
+</script>
+</body>
+</html>

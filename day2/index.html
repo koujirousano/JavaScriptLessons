@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html= lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>title</title>
+</head>
+<body>
+	<div id="result"></div>
+<script>
+
+	/*'use strict';
+	var hoge=10;
+	var hoge=20; //javaなら二度宣言なのでエラー
+	console.log(hoge);
+	if(true){
+		var fuga=10; //中で宣言しているため
+	}
+	console.log(fuga);
+	function func(){ //ここで宣言するのがわかりやすくてよい
+		var x=10;
+	}
+	console.log(x);
+
+window.onload=function(){ //名前のないfanctionスコープで宣言（これでくくってやってこの中で宣言してやる
+
+
+	};
+*/
+
+/*
+'use Strict'; //これが記述する前の基本
+(function(){
+
+})(); //ここまで基本
+*/
+
+'use strict'　//これがあれば
+result=10; //のように形無しでも宣言可能
+const result=document.getElementById("result"); //再代入できない変数を定義(domの取得)
+
+if(true){
+	let hoge=10;　//letで宣言すれば再代入が可能(javaライクな宣言)
+}
+console.log(hoge);
+
+</script>
+</body>
+</html>

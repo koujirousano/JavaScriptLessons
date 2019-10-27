@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>jsレッスン</title>
+</head>
+<body>
+	<h1>正の整数を入力してください</h1>
+	<input type="number" id="inNum" min="1" value="" placeholder="Enter your number">
+	<button onclick="btCalc()">Calci!</button>
+<div id="result"></div>
+<script>
+	function btCalc(){
+		var num=document.getElementById("inNum").value;
+		var sum=0;
+		for(var i=0;i<=num;i++){
+			sum+=i;
+		}
+		// var str='1から'+num+'までの和は'+sum+'です。';
+		var str='1から${num}までの和は${sum}です。';
+		document.getElementById("result").textContent=str;
+	}
+</script>
+</body>
+</html>

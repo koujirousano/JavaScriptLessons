@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>フルーツショッピング</title>
+</head>
+<body>
+<table>
+<tr>
+<th>りんご(120円)</th>
+<td><input type="number" data-price="120" min="0"></td>
+</tr>
+<tr>
+<th>ばなな(50円)</th>
+<td><input type="number" data-price="50" min="0"></td>
+</tr>
+<tr>
+<th>ぶどう(180円)</th>
+<td><input type="number" data-price="180"></td>
+</tr>
+</table>
+<div id="result"></div>
+<script>
+window.onload=function(){
+	var result=document.getElementById("result");
+	var fruits=document.querySelectorAll('[data-price]');
+	for(var i=0;i<fruits.length;i++){
+		fruits[i].addEventListener("change",numberChange);
+		fruits[i].addEventListener("keyup",numberChange);
+    fruits[i].addEventListener("mouseup",numberChange);
+	}
+	function numberChange(){
+		var sum=0;
+		for(var i=0;i<fruits.length;i++){
+			sum+=parseInt(fruits[i].getAttribute('data-price'))*fruits[i].value;
+		}
+		result.textContent='合計は'+sum+'円です';
+		//console.dir(fruits[0]);
+	}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>jsレッスン</title>
+</head>
+<body>
+<button id="btn">追加</button>
+<ol id="list"></ol>
+<script>
+var ol=document.getElementById('list');
+var btn=document.getElementById('btn');
+var count=0;
+btn.addEventListener('click',function(){
+  var li=document.createElement('li');
+  li.textContent='Item'+(++count);
+	ol.appendChild(li); <!--末端に加える-->
+});
+ </script>
+</body>
+</html>
+

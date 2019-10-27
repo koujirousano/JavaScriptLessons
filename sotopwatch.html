@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>ストップウォッチ</title>
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+    <style>
+        body {
+            background-color: pink;
+        }
+        .container {
+            margin-top: 100px;
+            text-align: center;
+        }
+        #timerLabel {
+            margin: 100px 0px;
+            color: white;
+        }
+        .myButton {
+            width: 180px;
+            height: 50px;
+            border: none;
+            border-radius: 6px;
+            background-color: white;
+            font-size: 16px;
+        }
+        .title, .myButton {
+            font-family: 'Berkshire Swash', cursive;
+            color: midnightblue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">StopWatch</h1>
+    <h1 id="timerLabel">00:00:00</h1>
+    <input type="button" class="myButton" onclick="start()" value="START" id="startBtn">
+    <input type="button" class="myButton" onclick="stop()" value="STOP">
+    <input type="button" class="myButton" onclick="reset()" value="RESET">
+</div>
+<script>
+	'use strict';
+    let status = 0; //trueかfulseでもよい
+    let time = 0;
+    const eleStartBtn = document.getElementById("startBtn");
+    const eleTimerLabel = document.getElementById('timerLabel');
+
+	function start(){　//startボタンが押された時に起動
+        status = 1;
+        startBtn.disabled = true;　//可能ならばtrue
+        timer(); //timerを起動
+    }
+
+    function stop(){　
+        status = 0;
+        startBtn.disabled = false;　//無効を有効
+    }
+    function reset(){
+        status = 0;
+        time = 0;
+        timerLabel.innerHTML = '00:00:00';
+        startBtn.disabled = false;　//無効をfalseで有効
+    }
+
+    function timer(){
+        if (status == 1) {
+            setTimeout(function() {
+                time++;
+				//分、秒、ミリ秒を計算
+                let min = Math.floor(time/100/60);　//分：Math.floorで少数点切り捨て
+                let sec = Math.floor(time/100);　//100ｍ秒は１秒
+                let mSec = time % 100;　
+                if (min < 10) min = "0" + min;　//一行の時は波カッコ無し（現場によってはダメな所もある)
+                if (sec >= 60) sec = sec % 60;
+                if (sec < 10) sec = "0" + sec;
+                if (mSec < 10) mSec = "0" + mSec;
+                timerLabel.innerHTML = min + ":" + sec + ":" + mSec;
+                timer();
+            }, 10);　//10mm秒後に行う（第二引数）
+        }
+    }
+    document.onkeydown = function(eveent) { 
+		if(event){
+			if(event.keyCode==32||event.which==32){
+				if(status==1){
+					stop();
+				}else if(status==0){
+					start();
+				}
+			}
+		}
+    };
+</script>
+</body>

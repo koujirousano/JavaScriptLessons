@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>整数電卓</title>
+</head>
+<body>
+<h2>整数を２つ入力してください</h2>
+<div>x:<input type="number" id="numX" value=""/></div>
+<div>y:<input type="number" id="numY" value=""/></div>
+<button onclick="btCalc('plus')">+</button>
+<button onclick="btCalc('minus')">-</button>
+<button onclick="btCalc('multi')">*</button>
+<button onclick="btCalc('div')">/</button>
+<button onclick="btCalc('rest')">%</button>
+<div id="result"></div>
+<script>
+var eleX=document.getElementById("numX");//ループの中に入れるのはNG
+var eleY=document.getElementById("numY");
+var result=document.getElementById("result");
+function btCalc(ope){
+  var x=parseInt(eleX.value); //値の取得はボタンが押された時に
+  var y=parseInt(eleY.value); //値の取得はボタンが押された時に
+  switch(ope){
+    case 'plus':
+		  result.textContent=x+"+"+y+"="+(x+y); //'x+y=${x+y}'でもいける
+    break;
+    case 'minus':
+		  result.textContent=x+"-"+y+"="+(x-y);　//'x+y${x-y}'
+    break;
+    case 'multi':
+		  result.textContent=x+"*"+y+"="+(x*y); //'x+y${x*y}'
+    break;
+    case 'div':
+      result.textContent=x+"/"+y+"="+(x/y);
+    break;
+    case 'rest':
+      result.textContent=x+"%"+y+"="+(x%y);
+    break;
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>パネルパズル</title>
+  <style>
+  #table{
+    margin:0 auto;
+    background:#eee;
+    padding:10px;
+  }
+  td{
+    font-size:24px;
+    text-align: center;
+    width:60px;
+    height:60px;
+    line-height: 60px;
+    border:2px solid #333;
+    border-radius: 15px;
+    background: #ddfeff;
+  }
+  td.empty{
+    background-color:#eee;
+    border-color:#eee;
+  }
+  td.ok{
+    border-color:lightgreen;
+  }
+  #startBt{
+    display:block;
+    width:200px;
+    margin:0px auto;
+    height:50px;
+    box-shadow:0 3px 0 5px #777;
+
+  }
+  #startBt:hover{
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  #msgBox{
+    width:200px;
+    margin:10px auto;
+    text-align: center;
+    font-size:20px;
+    height:30px;
+    line-height: 30px;
+  #ol{
+	  text-align:center;
+  }
+  </style>
+</head>
+<body>
+<table id="table"></table>
+<p id="msgBox"></p>
+<button id="startBt">START</button>
+<ol id="list"></ol>
+<script>
+'use strict';
+window.onload=function(){
+  var size=4; //パネルの一片の長さ
+  var li=document.createElement('li');
+　//domの取得
+  var shuffleCount;　//何回シャッフルするか
+  var panels;　//td要素を格納する配列
+  var isShuffled;　//シャッフルしたかどうか
+  var ol=document.getElementById('list');
+  var count=0;
+  var table=document.getElementById("table");
+  var msgBox=document.getElementById("msgBox");
+  var startBt=document.getElementById("startBt");
+　//domの取得
+
+　/****初期化処理****/
+
+  function init(){
+
+    shuffleCount=size*1000; //個の数を大きくするとより複雑になる（例：４０００回）
+    isShuffled=false; 
+    panels=[]; //配列を初期化
+    table.textContent=null;　//テーブルの子要素を全部削除
+    msgBox.textContent=null;　//textContentの中身を削除
+	li.textContent=(++count);
+	ol.appendChild(li);
+    createStage();
+  }
+	
+  function createStage(){
+    for(var i=0;i<size;i++){ //sizeには4が入っていて
+      var tr=document.createElement("tr");
+      for(var j=0;j<size;j++){
+        var td=document.createElement("td");
+        var index=i*size+j;　//iとjの値をもとにindexを計算
+        td.posId=index;　//td要素にposIdというプロパティを定義してindexを代入
+        td.textContent=index==size*size-1 ? "":index+1;　//表示文字列をindexを元に計算(1~15)
+        td.onclick=click; //オンクリックプロパティにクリック「メソッド」を登録
+        if(index==size*size-1){
+			//最後の要素を非表示
+          td.classList.add('empty');
+        }
+        panels.push(td); //配列の末尾に追加
+        tr.appendChild(td);　//作成したtdをtrに追加
+      }
+      table.appendChild(tr);　//テーブルにtrを追加
+    }
+  }
+  startBt.addEventListener("click",function(){　//押され時にシャッフル
+    init();
+    shuffle(shuffleCount);
+});
+
+  function shuffle(shuffleCount){　//4000回
+    for(var i=0;i<shuffleCount;i++){
+      click({target:{posId:Math.floor(Math.random()*size*size)}}); //0~15を生成
+    }
+    isShuffled=true;
+  }
+  function click(e){　//クリックされたdomが爆発
+	  console.log(e);　
+	
+	//if(typeof e==='number'){
+	//}else{
+	//}
+
+    var pos=e.target.posId;　//押されたDOM(td)のposIdがわかる
+	  /*****交換する処理*****/
+    if(pos-size>=0 && panels[pos-size].textContent==''){ //上と交換できるか
+      swap(pos,pos-size);
+    }else if(pos+size <size*size && panels[pos+size].textContent==''){　//下と交換できる
+      swap(pos,pos+size);
+    }else if((pos+1) % size != 0 && panels[pos+1].textContent==''){　//右と交換できる
+      swap(pos,pos+1);
+    }else if(pos % size !=0 && panels[pos-1].textContent==''){　//左と交換できる
+      swap(pos,pos-1);
+    }
+  }
+  function swap(p1,p2){　//ニッチェの入れ替えで
+    var temp=panels[p1].textContent;
+    panels[p1].textContent=panels[p2].textContent;
+    panels[p2].textContent=temp;
+
+    panels[p1].classList.add('empty');　//消す
+    panels[p2].classList.remove('empty');　//消えてた部分を表示させる
+    check(); //checkメソッド
+  }
+  function check(){
+    var okCount=0;
+    for(var i=0;i<panels.length;i++){
+      if(panels[i].posId==parseInt(panels[i].textContent)-1){
+        okCount++;
+        panels[i].classList.add("ok");
+      }else{
+        panels[i].classList.remove("ok");
+      }
+    }
+    if(isShuffled && okCount===size*size-1){
+      msgBox.textContent="Complete!";
+    }
+ }
+  init(); //初期化メソッド発動！！！！！
+};
+</script>
+</body>
+</html>

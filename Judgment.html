@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>jsレッスン</title>
+</head>
+<body>
+	<input type="text" id="itAge" value="" placeholder="Enter your age">
+	<button onclick="btCheck()">Check!</button>
+<div id="result"></div>
+<script>
+	function btCheck(){
+		var age=document.getElementById("itAge").value;
+		var str;
+		if(age >=20){
+			str='おとな';
+		}else{
+			str='こども';
+		}
+		document.getElementById("result").textContent=str;
+	}
+</script>
+</body>
+</html>

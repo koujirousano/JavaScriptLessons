@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>ストップウォッチ</title>
+	<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash&display=swap" rel="stylesheet"> 
+<style>
+body{
+	background-color:pink;
+}
+.container{
+	margin-top:100px;
+	text-align:center;
+}
+#timerLabel{
+	margin:100px 0;
+	color:white;
+}
+.myButton{
+	width:180px;
+	height:50px;
+	border:none;
+	border-radius:6px;
+	background-color:white;
+	font-size:16px;
+}
+.title, .myButton{
+	font-family: 'Berkshire Swash', cursive;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1 class="title">StopWatch</h1>
+		<h1 id="timerLabel">00:00:00</h1>
+		<input type="button" class="myButton" value="START" id="startBtn">
+		<input type="button" class="myButton" value="STOP" id="stopBtn">
+		<input type="button" class="myButton" value="RESET" id="resetBtn">
+
+	</div>
+<script>
+'use strict';
+{
+	let isPlay=false;
+	let time=0;
+	const startBtn=document.getElementById("startBtn");
+	const stopBtn=document.getElementById("stopBtn");
+	const resetBtn=document.getElementById("resetBtn");
+	const timerLabel=document.getElementById("timerLabel");
+	startBtn.addEventListener("click",start);
+	stopBtn.addEventListener("click",stop);
+	resetBtn.addEventListener("click",reset);
+	//STARTボタン
+	function start(){
+		isPlay=true;
+		startBtn.disabled=true;
+		timer();
+	}
+	function stop(){
+		//停止中にする
+		isPlay=false;
+		//スタートボタンを押せるようにする
+		startBtn.disabled=false;
+	}
+	function reset(){
+		//停止中にする
+		isPlay=false;
+		//タイムを0に戻す
+		time=0;
+		//タイマーラベルをリセット
+		timerLabel.textContent='00:00:00';
+		//スタートボタンを押せるようにする
+		startBtn.disabled=false;
+	}
+	function timer(){
+		//ステータスが動作中の場合のみ実行
+		if(isPlay){
+			setTimeout(function(){
+				time++;
+				//分、秒、ミリ秒を計算
+				let min=Math.floor(time/100/60);
+				let sec=Math.floor(time/100);
+				let mSec=time%100;
+				if(min < 10) min = "0"+min;
+				if(sec>=60) sec=sec%60;
+				if(sec<10) sec="0"+sec;
+				if(mSec<10) mSec="0"+mSec;
+				timerLabel.textContent=`${min}:${sec}:${mSec}`;
+				timer();
+			},10);
+		}
+	}
+	document.addEventListener("keydown",function(event){
+		if(event){
+			if(event.keyCode===32 || event.which===32){ //比較の場合は＝＝＝三つ
+				if(isPlay){
+					stop();
+				}else if(!isPlay){
+					start();
+				}
+			}
+			if(event.keyCode===82||event.which===82){
+				reset();
+			}
+		}
+	});
+}
+</script>
+</body>
+</html>

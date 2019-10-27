@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>jsレッスン</title>
+</head>
+<body>
+<button id="btRed" onclick="btSelect('red')">赤を持つ</button>
+<button id="btGreen" onclick="btSelect('green')">緑を持つ</button>
+<button id="btBlue" onclick="btSelect('blue')">青を持つ</button>
+<button id="btWrite" onclick="btWrite()">書く</button>
+<div id="result"></div>
+<script>
+function Pen(color,length){
+  this.color=color;
+  this.length=length;
+  this.write=function(){
+    this.length-=0.5;
+    return this.color+"で書きました。残りの長さ"+this.length;
+  }
+  this.selected=function(){
+    return this.color+"を持った。";
+  }
+}
+var penRed=new Pen("赤",10);
+var penGreen=new Pen("緑",8);
+var penBlue=new Pen("青",15);
+var pen=null;
+var result=document.getElementById("result");
+function btSelect(color){
+  switch(color){
+    case 'red':
+     pen=penRed;
+    break;
+    case 'green':
+     pen=penGreen;
+    break;
+    case 'blue':
+     pen=penBlue;
+    break;
+  }
+  result.textContent=pen.selected();
+}
+function btWrite(){
+  if(pen==null){
+    result.textContent="ペンを持ってください！";
+    return;
+  }
+  if(pen.length<=0){
+    result.textContent="もうかけません！";
+    return;
+  }
+  var msg=pen.write();
+  result.textContent=msg;
+}
+</script>
+</body>
+</html>

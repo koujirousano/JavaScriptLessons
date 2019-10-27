@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>jsレッスン</title>
+</head>
+<body>
+<table id="table" border="1"></table>
+<script>
+window.onload=function(){
+  var eleTable=document.getElementById('table');
+  for(var i=1;i<=9;i++){
+	  var tr=document.createElement("tr");
+	  for(var j=1;j<=9;j++){
+		  var td=document.createElement("td");
+		  td.textContent=i+"*"+j+"=";
+		  td.x=i;
+		  td.y=j;
+		  td.ans=i*j;
+		  td.addEventListener("mouseenter",function(){
+			  this.style.textDecoration="underline";
+		  });
+		  td.addEventListener("mouseleave",function(){
+			  this.style.textDecoration="none";
+		  });
+		  td.addEventListener("click",function(){
+			  var userAns=window.prompt(this.x+"*"+this.y+"="); //入力の窓
+			  if(this.ans==parsInt(userAns)){ /*==で曖昧な比較が可能 ===で厳密な比較*/
+				  this.style.backgroundColor="lightgreen";
+			  }else{
+				this.style.backgroundColor="pink";
+			  }
+		  });
+		  tr.appendChild(td);
+	  }
+	  eleTable.appendChild(tr);
+  }
+};
+</script>
+</body>
+</html>

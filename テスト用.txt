@@ -1,0 +1,65 @@
+﻿テスト
+
+webプログラミング
+C#
+
+&lt: <
+&gt; >
+&yen; \
+&anp; &
+&laquo; <<
+&raquo; >>
+
+http://www.shurey.com/js/labo/character.html
+
+https://qiita.com/shunsuke227ono/items/6c9916f80d82b73a7025
+
+p:nth-child(2)
+p:nth-of-type(2)の違いについて
+
+疑似クラス
+
+jsは上から書いていかない
+
+zIndex
+要素の重なりをずらしていく
+
+getElementsByClassName
+.addEventListener
+
+１６日ゲーム発表
+9月6日～現在までの範囲
+
+テスト範囲
+
+名簿アプリ
+bootstrap
+英和辞書
+http://joytas.net/programming/website/website07
+split
+値の取得はボタンが押された時に
+http://joytas.net/programming/website/website08
+javascriptのイベント
+
+スプリプトは複数記述できるよ
+
+letとvarの違い
+ブロックスコープ
+delegate
+イベントを作成する場合はインターフェースが必要
+
+static int Calc(int x,int y,Func<int,int,int> mf){}
+
+Func //引数なし、戻り値int
+Func //引数string 1 戻り値string
+Func //引数がint,string 戻り値がstring
+Action //引数も戻り値もなし
+Action void 引数１個
+Action void 引数２個
+
+値渡し
+参照値渡し（一個のものを動かしているイメージ)
+リファレンス渡し（初期化が必ず必要) newしてから上書きされるため
+
+https://qiita.com/kouh/items/dfc14d25ccb4e50afe89
+
